@@ -1,2 +1,2 @@
 # street-fighters
-Street Fighters Data
+Street Fighters Game
