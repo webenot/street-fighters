@@ -8,6 +8,16 @@ var sassMiddleware = require('node-sass-middleware');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb://localhost";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect((err) => {
+  const collection = client.db("heroku_n29qjvf9").collection("users");
+  console.log(collection);
+  // perform actions on the collection object
+  client.close();
+});
+
 var app = express();
 
 // view engine setup
