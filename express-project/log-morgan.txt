@@ -1,0 +1,13 @@
+[0mGET / [32m200 [0m27.918 ms - 176[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.360 ms - 111[0m
+GET / 200 176 - 12.495 ms
+GET /stylesheets/style.css 200 111 - 14.053 ms
+[23/May/2019:07:53:32 +0000] ::1 - - "GET / HTTP/1.1" 200 176 - 15.103 ms
+[23/May/2019:07:53:32 +0000] ::1 - - "GET /stylesheets/style.css HTTP/1.1" 200 111 - 4.063 ms
+[23/May/2019:07:54:46 +0000] ::1 - - "GET / HTTP/1.1" 200 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 176 - 16.247 ms
+[23/May/2019:07:54:46 +0000] ::1 - - "GET /stylesheets/style.css HTTP/1.1" 200 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 111 - 2.401 ms
+[23/May/2019:07:55:31 +0000] ::1 - - "GET / HTTP/1.1" 200 User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36" 176 - 13.924 ms
+[23/May/2019:07:55:31 +0000] ::1 - - "GET /stylesheets/style.css HTTP/1.1" 200 User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36" 111 - 2.053 ms
+[23/May/2019:07:56:13 +0000] ::1 - - "GET / HTTP/1.1" 200 User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36" 176 - 12.342 ms
+[23/May/2019:07:56:13 +0000] ::1 - - "GET /stylesheets/style.css HTTP/1.1" 200 User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36" 111 - 16.614 ms
+[23/May/2019:07:58:42 +0000] ::1 - - "GET /users HTTP/1.1" 200 User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36" 23 - 5.194 ms
