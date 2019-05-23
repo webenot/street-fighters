@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  const client = new MongoClient(DATABASE_URL, { useNewUrlParser: true });
+  const client = new MongoClient(MONGODB_URI, { useNewUrlParser: true });
   let collection;
   client.connect((err) => {
     collection = client.db("test").collection("users");
