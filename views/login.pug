@@ -1,0 +1,21 @@
+extends layout
+block content
+    include body/header
+    .container
+        h2.space-2-5 Login
+        - if (error)
+            .messages
+                .error #{error}
+                .close
+        form.space-2.form-register(method="post", action="/users/login")
+            .form-row.align-items-center.justify-content-center
+                .col-3
+                    label.sr-only(for="email") Email or Login
+                    input.form-control.mb-2#email(name="email", type="text", placeholder="Enter your email or login", required)
+                .w-100
+                .col-3
+                    label.sr-only(for="password") Password
+                    input.form-control.mb-2#password(name="password", type="password", placeholder="Password", required)
+                .w-100
+                .col-3.text-center
+                    button.btn.btn-primary.mb-2(type="submit") Login

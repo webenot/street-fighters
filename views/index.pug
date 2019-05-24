@@ -1,6 +1,5 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
-  p #{content}
+  include body/header
+  h2.space-2-5 Welcome to #{title}
+  h4 To start please login or register

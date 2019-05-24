@@ -1,0 +1,90 @@
+.health-indicator
+  width: 100%
+  height: .5rem
+  background-color: $border_grey
+  position: relative
+  margin: 0 0 1rem 0
+  .indicator
+    height: 100%
+    position: absolute
+    left: 0
+    top: 0
+    transition: ease width $filght_transition
+  .good
+    background-color: green
+
+.good
+  color: green
+
+.fighter-card
+  position: relative
+  .fighter-image
+    margin: 0
+
+.fight
+  text-align: center
+  max-width: 240px
+  img
+    margin: 0 0 2rem 0
+
+.fighter-hits
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  +opacity(0)
+  transition: ease opacity $filght_transition
+  img
+    width: 220px
+    height: auto
+    position: absolute
+    left: calc(50% - 110px)
+
+.fighter-hits.show
+  +opacity(1)
+  transition: ease opacity $filght_transition
+
+.fighter-bang
+  img
+    top: calc(50% - 81px)
+
+.fighter-avoid
+  img
+    top: calc(50% - 74px)
+
+.fighter-winner
+  img
+    top: calc(50% - 99px)
+
+.fighter-health
+  font-size: 1.5rem
+  text-align: center
+
+.fighter-hit-count
+  position: absolute
+  color: red
+  width: 60px
+  height: 60px
+  vertical-align: middle
+  background-color: rgba(255,255,255,0.8)
+  font-size: 1.5rem
+  font-weight: bold
+  text-align: center
+  border-radius: 50%
+  top: calc(50% - 20px)
+  left: calc(50% - 20px)
+  z-index: 1
+  display: inline-block
+  span:after
+    content: ''
+    width: 1px
+    height: 100%
+    display: inline-block
+    vertical-align: middle
+
+.fight-title
+  position: absolute
+  font-size: 1.3rem
+  top: -2rem
+  left: calc(50% - 150px)

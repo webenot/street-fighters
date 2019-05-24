@@ -1,0 +1,20 @@
+extends layout
+block content
+    include body/header
+    .container
+        h2.space-2-5 #{user.login}
+        .row.space-1
+            .col-12 Your email: <strong>#{user.email}</strong>
+            .col-12.fighters-list #{user.fighters}
+                if user.fighters && user.fighters.length
+                    .row
+                        each fighter in user.fighters
+                            .fighter
+                                img.fighter-image(src=fighter.source, alt=fighter.name)
+                                span.name #{fighter.name}
+                                .fighter-settings
+                                    .health Health: <strong>#{fighter.health} </strong>
+                                    .attack Attack: <strong>#{fighter.attack} </strong>
+                                    .defense Defense: <strong>#{fighter.defense} </strong>
+                else
+                    h4.space-2 You don't have any fighters

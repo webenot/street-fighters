@@ -1,0 +1,29 @@
+extends layout
+block content
+    include body/header
+    .container
+        h2.space-2-5 Register
+        - if (error)
+            .messages
+                .error #{error}
+                .close
+        form.space-2.form-register(method="post", action="/users")
+            .form-row.align-items-center.justify-content-center
+                .col-3
+                    label.sr-only(for="email") Email
+                    input.form-control.mb-2#email(name="email", type="email", placeholder="Enter your email", required)
+                .w-100
+                .col-3
+                    label.sr-only(for="login") Login
+                    input.form-control.mb-2#login(name="login", type="text", placeholder="Enter your login", required)
+                .w-100
+                .col-3
+                    label.sr-only(for="password") Password
+                    input.form-control.mb-2#password(name="password", type="password", placeholder="Password", required)
+                .w-100
+                .col-3
+                    label.sr-only(for="confirmationPassword") Confirm password
+                    input.form-control.mb-2#confirmationPassword(name="confirmationPassword", type="password", placeholder="Confirm password", required)
+                .w-100
+                .col-3.text-center
+                    button.btn.btn-primary.mb-2(type="submit") Register

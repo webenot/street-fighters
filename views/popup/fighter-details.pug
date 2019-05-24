@@ -1,0 +1,16 @@
+.fighter-name
+.fighter-container
+    .fighter-image
+        img(src="", alt="")
+    .figter-info
+        input(type="hidden", name="health", id="fighter-id", value="")
+        .fighter-parameter.fighter-health
+            label(for="fighter-health") Health
+            input(type="text", name="health", id="fighter-health", value="")
+        .fighter-parameter.fighter-defense
+            label(for="fighter-defense") Defense
+            input(type="text", name="defence", id="fighter-defense", value="")
+        .fighter-parameter.fighter-attack
+            label(for="fighter-attack") Attack
+            input(type="text", name="defence", id="fighter-attack", value="")
+        button.btn.btn-save.btn-block Save fighter settings
