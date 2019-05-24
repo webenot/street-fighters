@@ -1,0 +1,17 @@
+header
+    .container
+        .row.align-items-center.justify-content-center
+            a.logo.col-2(href="/")
+                img.img-fluid(src="/images/logo.png" alt="")
+            h1.title.col-8 #{title}
+            if user
+                - userId = user._id
+                .account.col-1
+                    a.btn.btn-register.btn-outline-primary(href="/user/" + userId) Account
+                .logout.col-1
+                    a.btn.btn-register.btn-outline-primary(href="/logout") Logout
+            else
+                .register.col-1
+                    a.btn.btn-register.btn-outline-primary(href="/register") Register
+                .login.col-1
+                    a.btn.btn-login.btn-outline-primary(href="/login") Login

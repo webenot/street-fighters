@@ -1,0 +1,11 @@
+extends layout
+block content
+    noscript You need to enable JavaScript to run this app
+    #root
+    .loader#loading-overlay
+        img(src="images/logo.png" alt="")
+    .fight-settings.hidden
+        button.btn.btn-go Go Fight!
+        .messages
+    include popup/popup
+    script(src="javascripts/dist/boundle.js")

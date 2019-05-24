@@ -1,0 +1,65 @@
+.popup
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background-color: $popup_overlay_bg
+  +opacity(0)
+  z-index: -1
+  transition: ease opacity $common_transition
+  overflow: hidden
+  overflow-y: auto
+  text-align: center
+
+.popup.open
+  +opacity(1)
+  z-index: 1
+  transition: ease opacity $common_transition
+
+.window-open
+  position: relative
+  display: inline-block
+  top: 7%
+  min-width: 25%
+  max-width: 100%
+  background: #fff
+  border-radius: .6rem
+  box-shadow: 0 0 15px $window_shadow
+  padding: 4rem
+  margin: auto
+
+.window-open.closed
+  display: none
+
+.close-btn
+  position: absolute
+  right: 1rem
+  top: 1rem
+  width: 2rem
+  height: 2rem
+  cursor: pointer
+
+.close-btn:before, .close-btn:after
+  position: absolute
+  transform: rotate(45deg)
+  background-color: $close_btn
+  width: 2rem
+  height: 0.2rem
+  content: ''
+  top: 0.8rem
+  right: .1rem
+  transition: ease background-color $common_transition
+
+.close-btn:after
+  transform: rotate(-45deg)
+
+.close-btn:hover:before, .close-btn:hover:after
+  background-color: $close_btn_hover
+  transition: ease background-color $common_transition
+
+.window-content
+  position: relative
+  //overflow: hidden
+  height: 100%
+  //overflow-y: auto
