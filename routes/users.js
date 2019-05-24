@@ -5,7 +5,6 @@ const User = require('../models/user').User;
 const hashPassword = require('../models/user').hashPassword;
 const config = require('config');
 const validatePassword = require('models/user').validatePassword;
-const passport = require('passport');
 
 const userSchema = Joi.object().keys({
   email: Joi.string().email().required(),
@@ -13,15 +12,20 @@ const userSchema = Joi.object().keys({
   password: Joi.string().regex(/^[a-zA-Z0-9]{1,30}$/).required(),
   confirmationPassword: Joi.any().valid(Joi.ref('password')).required()
 });
+router.route('/').get((req, res, next) => {
+  if (!req.user)
+    res.redirect('/login');
+  res.redirect('/user/' + req.user._id);
+}).post((req, res, next) => {
+  if (!req.user)
+    res.redirect('/login');
+  res.redirect('/user/' + req.user._id);
+});
 
 router.route('/register').get(function(req, res, next) {
-  passport.authenticate('local', {
-    failureRedirect: '/register'
-  });
   if (!req.user)
     res.redirect('/register');
-  else
-    res.redirect('/user/' + req.user._id);
+  res.redirect('/user/' + req.user._id);
 })
   .post(async function(req, res, next) {
     try {
@@ -63,13 +67,9 @@ router.route('/register').get(function(req, res, next) {
 });
 
 router.route('/login').get((req, res, next) => {
-  passport.authenticate('local', {
-    failureRedirect: '/login'
-  });
   if (!req.user)
     res.redirect('/login');
-  else
-    res.redirect('/user/' + req.user._id);
+  res.redirect('/user/' + req.user._id);
 })
   .post(async (req, res, next) => {
     const loginSchema = Joi.object().keys({
