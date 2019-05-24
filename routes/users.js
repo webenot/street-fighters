@@ -4,7 +4,7 @@ const Joi = require('joi');
 const User = require('../models/user').User;
 const hashPassword = require('../models/user').hashPassword;
 const config = require('config');
-const bcrypt = require('bcryptjs');
+const validatePassword = require('models/user').validatePassword;
 const passport = require('passport');
 
 const userSchema = Joi.object().keys({
@@ -14,12 +14,14 @@ const userSchema = Joi.object().keys({
   confirmationPassword: Joi.any().valid(Joi.ref('password')).required()
 });
 
-router.route('/').get(function(req, res, next) {
+router.route('/register').get(function(req, res, next) {
   passport.authenticate('local', {
-    failureRedirect: '/login',
-    successRedirect: '/user/' + req.session._id
+    failureRedirect: '/register'
   });
-  res.render('login', {title: config.get('app:title')});
+  if (!req.user)
+    res.redirect('/register');
+  else
+    res.redirect('/user/' + req.user._id);
 })
   .post(async function(req, res, next) {
     try {
@@ -62,10 +64,12 @@ router.route('/').get(function(req, res, next) {
 
 router.route('/login').get((req, res, next) => {
   passport.authenticate('local', {
-    failureRedirect: '/login',
-    successRedirect: '/user/' + req.session._id
+    failureRedirect: '/login'
   });
-  res.render('login', {title: config.get('app:title')});
+  if (!req.user)
+    res.redirect('/login');
+  else
+    res.redirect('/user/' + req.user._id);
 })
   .post(async (req, res, next) => {
     const loginSchema = Joi.object().keys({
@@ -80,19 +84,21 @@ router.route('/login').get((req, res, next) => {
         return;
       }
 
-      const login = result.value.email.split('@');
+      let login = result.value.email.split('@');
+      let user;
       if (login.length > 1) {
-        const user = await User.findOne({ 'email': result.value.email });
-        if (user) {
-          bcrypt.compare(result.value.password, user.password, function(err, result) {
-            if (err) {
-              res.render('login', {error: 'Data entered is not valid. Please try again.', title: config.get('app:title')});
-              return;
-            }
-            if (result) {
-              res.redirect('/user/' + user._id);
-            }
-            res.render('login', {error: 'Data entered is not valid. Please try again.', title: config.get('app:title')});
+        user = await User.findOne({ 'email': result.value.email });
+      } else {
+        user = await User.findOne({ 'login': result.value.email });
+      }
+      if (user) {
+        let valid = await validatePassword(result.value.password, user.password);
+        if (!valid) {
+          res.render('login', {error: 'Data entered is not valid. Please try again.', title: config.get('app:title')});
+        } else {
+          req.login(user, (err) => {
+            if (err) { return next(err); }
+            return res.redirect('/user/' + req.user._id);
           });
         }
       }

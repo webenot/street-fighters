@@ -46,3 +46,10 @@ module.exports.hashPassword = async (password) => {
         throw new Error('Hashing failed', error);
     }
 };
+module.exports.validatePassword = async (password, hash) => {
+    try {
+        return await bcrypt.compare(password, hash);
+    } catch(error) {
+        throw new Error('Hashing failed', error);
+    }
+};
