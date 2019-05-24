@@ -1,0 +1,17 @@
+//=====Mixins=================
+=opacity($opacity)
+  -moz-opacity: $opacity
+  opacity: $opacity
+  // IE8 filter
+  $opacity-ie: ($opacity * 100)
+  filter: alpha(opacity=$opacity-ie)
+
+=filter-blur($filter)
+  -webkit-filter: blur($filter)
+  -ms-filter: blur($filter)
+  filter: blur($filter)
+
+=font-feature-settings($settings)
+  font-feature-settings: $settings 1
+  -webkit-font-feature-settings: $settings
+  -moz-font-feature-settings: $settings

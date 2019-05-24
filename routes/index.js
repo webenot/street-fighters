@@ -1,24 +1,18 @@
-var express = require('express');
-const MongoClient = require('mongodb').MongoClient;
+const express = require('express');
+const config = require('config');
+const passport = require('passport');
+const User = require('../models/user').User;
 
-var router = express.Router();
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-
-    const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true });
-    let collection, db;
-    client.connect((err) => {
-        db = client.db("heroku_zfh39rpk");
-        collection = db.collection("users");
-        console.log(collection);
-        console.log(db);
-        // perform actions on the collection object
-        client.close();
-    });
-
-
-    res.render('index', { title: 'Express', content: collection});
+router.get('/', async function(req, res, next) {
+    passport.authenticate('local');
+    let user = await User.findOne({ '_id': req.session._id });
+    if (!user) {
+        res.render('index', { title: config.get('app:title') });
+    } else {
+        res.render('index', { title: config.get('app:title'), user: user });
+    }
 });
 
 module.exports = router;

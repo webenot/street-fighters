@@ -1,0 +1,26 @@
+.fighter
+  display: flex
+  flex-direction: column
+  padding: 20px
+  border: 2px solid white
+
+.fighter.selected
+  border-color: red
+  .btn-select
+    border-color: red
+    color: red
+  .btn-select:hover
+    color: white
+    background-color: red
+
+.fighter:hover
+  box-shadow: 0 0 50px 10px $block_hover_shadow_color
+  cursor: pointer
+
+.name
+  align-self: center
+  font-size: 21px
+  margin-top: 20px
+
+.fighter-image
+  height: 260px

@@ -1,0 +1,31 @@
+.messages
+  text-align: center
+  margin: 1rem 0 0 0
+  > div
+    padding: .5rem 2rem .5rem 1rem
+    border-left: 3px solid white
+    background-color: white
+    box-shadow: 2px 2px 5px $window_shadow
+    display: inline-block
+    position: relative
+  .success
+    border-color: green
+  .error
+    border-color: red
+  .close
+    position: absolute
+    right: 3px
+    top: 6px
+    border-radius: 50%
+    border: 1px solid $border_grey
+    width: 20px
+    height: 20px
+    cursor: pointer
+    color: white
+    background-color: $border_grey
+    transition: ease all $common_transition
+    text-align: center
+    font-size: .8rem
+  .close:hover
+    color: $border_grey
+    background-color: white
