@@ -5,8 +5,18 @@ const passport = require('passport');
 
 const router = express.Router();
 
+router.get('/', async function(req, res, next) {
+    passport.authenticate('local');
+    if (!req.user)
+        res.render('login', { title: config.get('app:title') });
+    else
+        res.redirect('/user/' + req.user._id);
+});
+
 router.get('/:id', async function(req, res, next) {
     passport.authenticate('local', { failureRedirect: '/login' });
+    //if (process.env.NODE_ENV === 'development') console.log(req);
+    if (process.env.NODE_ENV === 'development') console.log(req.user);
     let user = await User.User.findOne({ '_id': req.params.id });
     if (process.env.NODE_ENV === 'development') console.log(user.fighters);
     if (user) {

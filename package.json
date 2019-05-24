@@ -1,6 +1,6 @@
 {
   "name": "street-fighters",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "scripts": {
     "start": "cross-env NODE_ENV=production webpack -p && cross-env NODE_ENV=production NODE_PATH=. ./bin/www",
