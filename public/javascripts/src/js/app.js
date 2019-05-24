@@ -34,7 +34,7 @@ class App {
             let saveBtn = document.querySelector('#fighter-details .btn-save');
             saveBtn.addEventListener('click', e => {
                 fightersList.set(saveFighter());
-                console.log(fightersList);
+                if (process.env.NODE_ENV === 'development') console.log(fightersList);
             });
 
             let fightBtn = document.querySelector('.btn-go');
