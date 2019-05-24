@@ -1,6 +1,6 @@
 {
   "name": "street-fighters",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "private": false,
   "scripts": {
     "start": "cross-env NODE_ENV=production webpack -p && cross-env NODE_ENV=production NODE_PATH=. ./bin/www",
@@ -46,9 +46,7 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1",
-    "webpack-node-externals": "^1.7.2"
-  },
-  "devDependencies": {
+    "webpack-node-externals": "^1.7.2",
     "cross-env": "^5.2.0"
   }
 }
