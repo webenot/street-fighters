@@ -11,6 +11,9 @@ const expressHandlebars = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('models/user').User;
+const validatePassword = require('models/user').validatePassword;
 
 const postcssMiddleware = require('postcss-middleware');
 const autoprefixer = require('autoprefixer');
@@ -89,6 +92,43 @@ httpServer.use(session({
   saveUninitialized: false,
   resave: false
 }));
+
+passport.use(new LocalStrategy({
+      usernameField: 'email',
+      passwordField: 'password'
+    },
+    function(username, password, done) {
+      let login = username.split('@');
+      if (login.length > 1) {
+        User.findOne({ email: username }, async function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          let valid = await validatePassword(password, user.password);
+          if (!valid) { return done(null, false); }
+          return done(null, user);
+        });
+      } else {
+        User.findOne({ login: username }, async function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          let result = false;
+          let valid = await validatePassword(password, user.password);
+          if (!valid) { return done(null, false); }
+          if (!result) { return done(null, false); }
+          return done(null, user);
+        });
+      }
+    }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  console.log(user);
+  done(null, user);
+});
 
 httpServer.use(passport.initialize());
 httpServer.use(passport.session());
