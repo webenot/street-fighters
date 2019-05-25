@@ -161,7 +161,7 @@ const initRoutes = () => Promise.resolve().then(() => {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('error', {title: config.get('app:title')});
   });
 });
 
