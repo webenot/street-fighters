@@ -1,6 +1,6 @@
 {
   "name": "street-fighters",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": false,
   "scripts": {
     "start": "cross-env NODE_ENV=production webpack -p && cross-env NODE_ENV=production NODE_PATH=. ./bin/www",
@@ -18,10 +18,12 @@
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.6",
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^2.0.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
+    "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-autoprefixer": "^5.4.0",
@@ -35,6 +37,7 @@
     "morgan": "~1.9.1",
     "nconf": "^0.10.0",
     "node-bourbon": "^4.2.8",
+    "node-fetch": "^2.6.0",
     "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -46,7 +49,6 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1",
-    "webpack-node-externals": "^1.7.2",
-    "cross-env": "^5.2.0"
+    "webpack-node-externals": "^1.7.2"
   }
 }
