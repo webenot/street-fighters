@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const Cleanlugin = require('clean-webpack-plugin');
 require("@babel/polyfill");
 
-const config = require('./config');
+const config = require('./config/index.js');
 const staticDir =  config.get('httpServer:staticDir');
 
 const isProduction = (process.env.NODE_ENV === 'production');
