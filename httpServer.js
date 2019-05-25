@@ -12,18 +12,8 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('models/user').User;
-const validatePassword = require('models/user').validatePassword;
 
 const postcssMiddleware = require('postcss-middleware');
-const autoprefixer = require('autoprefixer');
-
-const indexRouter = require('routes/index');
-const usersRouter = require('routes/users');
-const registerRouter = require('routes/register');
-const loginRouter = require('routes/login');
-const userRouter = require('routes/user');
-const logoutRouter = require('routes/logout');
 
 var logDirectory = path.join(__dirname, 'log');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -65,61 +55,15 @@ httpServer.use(logger('dev'));
 httpServer.use(bodyParser.json());
 httpServer.use(bodyParser.urlencoded({ extended: false }));
 httpServer.use(cookieParser());
-httpServer.use(sassMiddleware({
-  src: staticDir,
-  dest: staticDir,
-  debug: true,
-  indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true,
-  outputStyle: 'extended'
-}));
-httpServer.use('/css', postcssMiddleware({
-  plugins: [
-    /* Plugins */
-    autoprefixer({
-      /* Options */
-    })
-  ],
-  src: function(req) {
-    return path.join(staticDir + '/stylesheets', req.url);
-  }
-}));
+httpServer.use(sassMiddleware(config.get('sass')));
+httpServer.use('/css', postcssMiddleware(config.get('postcss')));
 httpServer.use(express.static(staticDir));
 
-httpServer.use(session({
-  cookie: { maxAge: 60000 },
-  secret: 'codeworkrsecret',
-  saveUninitialized: false,
-  resave: false
-}));
+httpServer.use(session(config.get('session')));
 
-passport.use(new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password'
-    },
-    function(username, password, done) {
-      let login = username.split('@');
-      if (login.length > 1) {
-        User.findOne({ email: username }, async function (err, user) {
-          if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          let valid = await validatePassword(password, user.password);
-          if (!valid) { return done(null, false); }
-          return done(null, user);
-        });
-      } else {
-        User.findOne({ login: username }, async function (err, user) {
-          if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          let result = false;
-          let valid = await validatePassword(password, user.password);
-          if (!valid) { return done(null, false); }
-          if (!result) { return done(null, false); }
-          return done(null, user);
-        });
-      }
-    }
-));
+const userValidator = require('middlewares/userValidator.middleware');
+
+passport.use(new LocalStrategy(config.get('localStrategy'), userValidator));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -134,11 +78,19 @@ httpServer.use(passport.initialize());
 httpServer.use(passport.session());
 
 httpServer.use(flash());
-httpServer.use((req, res, next) => {
-  res.locals.success_mesages = req.flash('success');
-  res.locals.error_messages = req.flash('error');
-  next()
-});
+
+const flashMiddleware = require('middlewares/flash.middleware');
+
+httpServer.use(flashMiddleware);
+
+const indexRouter = require('routes/index');
+const usersRouter = require('routes/users');
+const registerRouter = require('routes/register');
+const loginRouter = require('routes/login');
+const userRouter = require('routes/user');
+const logoutRouter = require('routes/logout');
+const selectRouter = require('routes/select-fighter');
+const fighterRouter = require('routes/fighter');
 
 const initRoutes = () => Promise.resolve().then(() => {
   httpServer.use('/', indexRouter);
@@ -147,6 +99,8 @@ const initRoutes = () => Promise.resolve().then(() => {
   httpServer.use('/login', loginRouter);
   httpServer.use('/user', userRouter);
   httpServer.use('/logout', logoutRouter);
+  httpServer.use('/select-fighter', selectRouter);
+  httpServer.use('/fighter', fighterRouter);
 
   // catch 404 and forward to error handler
   httpServer.use(function(req, res, next) {

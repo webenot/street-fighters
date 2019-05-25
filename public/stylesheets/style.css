@@ -103,11 +103,13 @@ body.noscroll {
     color: #ccc;
     background-color: white; }
 
-.fighter {
+.fighter, a.fighter {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 2px solid white; }
+  border: 2px solid white;
+  color: inherit;
+  text-decoration: none; }
 
 .fighter.selected {
   border-color: red; }
@@ -118,9 +120,11 @@ body.noscroll {
     color: white;
     background-color: red; }
 
-.fighter:hover {
+.fighter:hover, a.fighter:hover {
   box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.06);
-  cursor: pointer; }
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none; }
 
 .name {
   align-self: center;
@@ -128,7 +132,7 @@ body.noscroll {
   margin-top: 20px; }
 
 .fighter-image {
-  height: 260px; }
+  height: 216px; }
 
 .popup {
   position: absolute;

@@ -3,9 +3,10 @@ header
         .row.align-items-center.justify-content-center
             a.logo.col-2(href="/")
                 img.img-fluid(src="/images/logo.png" alt="")
-            h1.title.col-8 #{title}
+            h1.title.col-6 #{title}
             if user
                 - userId = user._id
+                .username.col-2.text-right #{user.login}
                 .account.col-1
                     a.btn.btn-register.btn-outline-primary(href="/user/" + userId) Account
                 .logout.col-1

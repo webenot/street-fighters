@@ -15,6 +15,16 @@ const GeneralSchema = {
         type: Schema.Types.String,
         ref: 'Fighter'
     },
+    fights: {
+        type: Schema.Types.Decimal,
+        default: 0
+    },
+    level: {
+        fights: {
+            type: Schema.Types.Decimal,
+            default: 0
+        },
+    },
     freePoints: {
         type: Schema.Types.Decimal,
         default: 5

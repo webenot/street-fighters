@@ -1,0 +1,29 @@
+mixin fighter-card(item)
+    if isUser
+        img.fighter-image(src=item.fighter.source, alt=item.fighter.name)
+        span.name #{item.fighter.name}
+        .fighter-settings.space-1
+            .health Health: <strong>#{item.currentConfig.health}</strong>
+            .attack Attack: <strong>#{item.currentConfig.attack}</strong>
+            .defense Defense: <strong>#{item.currentConfig.defense}</strong>
+            .free-points Free Points: <strong>#{item.freePoints}</strong>
+    else
+        img.fighter-image(src=item.source, alt=item.name)
+        span.name #{item.name}
+        .fighter-settings.space-1
+            .health Health: <strong>#{item.health}</strong>
+            .attack Attack: <strong>#{item.attack}</strong>
+            .defense Defense: <strong>#{item.defense}</strong>
+
+if fighters && fighters.length
+    h4 Your fighters
+    .row
+        each fighter in fighters
+            if isUser
+                .fighter
+                    +fighter-card(fighter)
+            else
+                a.fighter(href="/fighter/" + fighter._id )
+                    +fighter-card(fighter)
+else
+    h4.space-2 You don't have any fighters
