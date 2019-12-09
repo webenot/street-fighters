@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
     db: {
         //uri: 'mongodb://localhost:27017/heroku_zfh39rpk',
