@@ -20,10 +20,8 @@ const GeneralSchema = {
         default: 0
     },
     level: {
-        fights: {
-            type: Schema.Types.Decimal,
-            default: 0
-        },
+        type: Schema.Types.Decimal,
+        default: 0
     },
     freePoints: {
         type: Schema.Types.Decimal,
