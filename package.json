@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production webpack -p && cross-env NODE_ENV=production NODE_PATH=. node ./bin/www",
     "dev": "cross-env NODE_ENV=development webpack --debug --display-error-details && cross-env NODE_ENV=development NODE_PATH=. nodemon ./bin/www",
+    "devServer": "cross-env NODE_ENV=development NODE_PATH=. nodemon ./bin/www",
     "devFront": "cross-env NODE_ENV=development webpack-dev-server --debug --display-error-details",
     "devFrontWatch": "cross-env NODE_ENV=development webpack --watch --debug --display-error-details",
     "startFront": "cross-env NODE_ENV=production webpack-dev-server -p",

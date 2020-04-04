@@ -8,7 +8,10 @@ module.exports = {
             config: {
                 autoIndex: false,
             },
-            useNewUrlParser: true
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
         }
     }
 };
