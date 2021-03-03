@@ -44,7 +44,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "postcss-middleware": "^1.1.4",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "rotating-file-stream": "^1.4.6",
     "shortid": "^2.2.15",
     "tar": "^4.4.13",
